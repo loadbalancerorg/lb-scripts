@@ -4,7 +4,7 @@
 ##
 ## Version Info
 ## 0.01 - Initial version (beta)
-##
+## 0.02 - IPv6 support enhancements
 
 param(
     [Parameter(Mandatory=$false)][String] $ip4,
@@ -16,7 +16,7 @@ param(
 #Requires -RunAsAdministrator
 $Version = '0.01 beta'
 $scriptName = $MyInvocation.MyCommand
-
+$Debug = $false
 
 function showUsage {
     showWelcome
@@ -56,7 +56,13 @@ if ($help) {
 }
 
 if (!$ip4 -and !$ip6) {
-    $ip4 = $(Read-Host "Enter IP address for Loopback Interface")
+    $ip = $(Read-Host "Enter IP address for Loopback Interface")
+
+    if ($ip -like "*:*") {
+        $ip6 = $ip
+    } else {
+        $ip4 = $ip
+    }
 }
 
 if ($ip4) {
@@ -71,6 +77,15 @@ if ($ip6) {
 # The IPv6 address that you would like to assign to the loopback interface along with the prefix length (eg. if the IP is routed to the server usually you would set the prefix length to 128). If you are not adding an IPv6 address do not set these variables.
     $loopback_ipv6 = $ip6
     $loopback_ipv6_length = '128'
+}
+
+if ($Debug) {
+    Write-Host "
+    IP Entered: $ip
+    IPv4: $loopback_ipv4 / $loopback_ipv4_length
+    IPv6: $loopback_ipv6 / $loopback_ipv6_length
+    "
+    Exit 5
 }
 
 Install-Module -Name LoopbackAdapter -MinimumVersion 1.2.0.0 -Force
@@ -116,9 +131,4 @@ if ($print) {
     Enable-NetAdapterBinding -Name $loopback_name -ComponentID ms_server
 }
 
-#Disable-NetAdapterBinding -Name $loopback_name -ComponentID ms_msclient
-#Disable-NetAdapterBinding -Name $loopback_name -ComponentID ms_pacer
-#Disable-NetAdapterBinding -Name $loopback_name -ComponentID ms_server
-#Disable-NetAdapterBinding -Name $loopback_name -ComponentID ms_lltdio
-#Disable-NetAdapterBinding -Name $loopback_name -ComponentID ms_rspndr
 
