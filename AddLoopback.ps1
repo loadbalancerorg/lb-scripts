@@ -10,13 +10,14 @@ param(
     [Parameter(Mandatory=$false)][String] $ip4,
     [Parameter(Mandatory=$false)][String] $ip6,
     [Parameter(Mandatory=$false)][switch] $print,
-    [Parameter(Mandatory=$false)][switch] $help
-    )
+    [Parameter(Mandatory=$false)][switch] $help,
+    [Parameter(Mandatory=$false)][switch] $v = $false,
+    [Parameter(Mandatory=$false)][switch] $vv = $false # Quit before actually installing anything
+)
 
 #Requires -RunAsAdministrator
 $Version = '0.02 beta'
 $scriptName = $MyInvocation.MyCommand
-$Debug = $false
 
 function showUsage {
     showWelcome
@@ -81,12 +82,16 @@ if ($ip6) {
     $loopback_ipv6_length = '128'
 }
 
-if ($Debug) {
-    Write-Host "
+if ($v -or $vv) {
+    Write-Host "DEBUG:
     IP Entered: $ip
     IPv4: $loopback_ipv4 / $loopback_ipv4_length
     IPv6: $loopback_ipv6 / $loopback_ipv6_length
     "
+}
+
+if ($vv) {
+    # Don't actually install the modules or make changes - debug mode
     Exit 5
 }
 
