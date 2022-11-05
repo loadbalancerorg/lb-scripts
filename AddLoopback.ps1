@@ -14,7 +14,7 @@ param(
     )
 
 #Requires -RunAsAdministrator
-$Version = '0.01 beta'
+$Version = '0.02 beta'
 $scriptName = $MyInvocation.MyCommand
 $Debug = $false
 
@@ -56,6 +56,8 @@ if ($help) {
 }
 
 if (!$ip4 -and !$ip6) {
+    showWelcome
+    
     $ip = $(Read-Host "Enter IP address for Loopback Interface")
 
     if ($ip -like "*:*") {
