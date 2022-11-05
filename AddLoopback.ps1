@@ -20,7 +20,7 @@ $Version = '0.02 beta'
 $scriptName = $MyInvocation.MyCommand
 
 function showUsage {
-    showWelcome
+    showBanner
 
     Write-Host "Usage: $scriptName parameters
     
@@ -38,7 +38,7 @@ function showUsage {
     Exit 1
 }
 
-function showWelcome  {
+function showBanner  {
     Write-Host "
 Powershell tool to add loopback adapter to a Windows Server. 
 Version $Version   
@@ -57,7 +57,7 @@ if ($help) {
 }
 
 if (!$ip4 -and !$ip6) {
-    showWelcome
+    showBanner
     
     $ip = $(Read-Host "Enter IP address for Loopback Interface")
 
