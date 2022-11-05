@@ -8,7 +8,7 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 ### Variables
-DEBUG=0
+DEBUG=1
 DATE=`date +%b\ %d\ %H:%M:%S` # syslog format
 APP=$(basename ${0})
 LOG=${APP}.log
@@ -28,14 +28,14 @@ for port in ${HALF_OPEN_RPT}; do
         ec=${?}
         if [ ${ec} -ne "0" ]; then
             if [ ${DEBUG} -eq "1" ]; then
-                echo "${DATE} ${APP} Fail: (${ec})" >> /tmp/${LOG}
+                echo "${DATE} ${APP} Fail: ${RIP}:${port} (${ec})" >> /tmp/${LOG}
             fi
                 exit ${ec}
         fi
 done
 
 if [ ${DEBUG} -eq "1" ]; then
-        echo "${DATE} ${APP} Success: (${ec})" >> /tmp/${LOG}
+        echo "${DATE} ${APP} Success: ${RIP}:${port} (${ec})" >> /tmp/${LOG}
 fi
 
 exit 0
