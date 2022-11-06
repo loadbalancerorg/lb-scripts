@@ -9,6 +9,7 @@
 param(
     [Parameter(Mandatory=$false)][String] $ip4,
     [Parameter(Mandatory=$false)][String] $ip6,
+    [Parameter(Mandatory=$false)][String] $ip,
     [Parameter(Mandatory=$false)][String] $ethernet = 'Ethernet0',
     [Parameter(Mandatory=$false)][switch] $print,
     [Parameter(Mandatory=$false)][switch] $help,
@@ -58,6 +59,13 @@ $loopback_name = 'Loopback'
 # $primary_interface = 'Ethernet0'
 
 if ($help) {
+    showUsage
+    Exit 0
+}
+
+if ($ip) {
+    # this really should just check if it is v4 or v6 and act accordingly, but for now bounce the request and ask for it to be re-formed
+    Write-Host "Incorrect option -ip please say -ip4 or -ip6"
     showUsage
     Exit 0
 }
