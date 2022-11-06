@@ -5,6 +5,7 @@
 ## Version Info
 ## 0.01 - Initial version (beta)
 ## 0.02 - IPv6 support enhancements
+## 0.03 - hidden cleanup options
 
 param(
     [Parameter(Mandatory=$false)][String] $ip4,
@@ -19,7 +20,7 @@ param(
 )
 
 #Requires -RunAsAdministrator
-$Version = '0.02 beta'
+$Version = '0.03 beta'
 $scriptName = $MyInvocation.MyCommand
 
 $primary_interface = $ethernet
