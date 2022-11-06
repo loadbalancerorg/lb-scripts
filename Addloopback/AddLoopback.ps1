@@ -50,48 +50,6 @@ Version $Version
     "
 }
 
-function Remove-LoopbackAdapter
-{
-    [CmdLetBinding()]
-    param
-    (
-        [Parameter(
-            Mandatory=$true,
-            Position=0)]
-        [string]
-        $Name,
-        
-        [switch]
-        $Force
-    )
-    $null = $PSBoundParameters.Remove('Name')
-
-    # Check for the existing Loopback Adapter
-    $Adapter = Get-NetAdapter `
-        -Name $Name `
-        -ErrorAction SilentlyContinue
-
-    # Is the loopback adapter installed?
-    if (! $Adapter)
-    {
-        # Adapter doesn't exist
-        Throw "Loopback Adapter $Name is not found."
-    }
-
-    # Is the adapter Loopback adapter?
-    if ($Adapter.DriverDescription -ne 'Microsoft KM-TEST Loopback Adapter')
-    {
-        # Not a loopback adapter - don't uninstall this!
-        Throw "Network Adapter $Name is not a Microsoft KM-TEST Loopback Adapter."
-    } # if
-
-    # Make sure DevCon is installed.
-    $DevConExe = (Install-Devcon @PSBoundParameters).Name
-
-    # Use Devcon.exe to remove the Microsoft Loopback adapter using the PnPDeviceID.
-    # Requires local Admin privs.
-    $null = & $DevConExe @('remove',"@$($Adapter.PnPDeviceID)")
-} # function Remove-LoopbackAdapter
 
 # The name for the loopback adapter interface that will be created.
 $loopback_name = 'Loopback'
