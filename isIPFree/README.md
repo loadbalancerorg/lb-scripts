@@ -1,7 +1,8 @@
+# isIpFree
+
 Simple script to run on a Linux box, Loadbalancer, Windows under WSL or similar
 
 Requires nmap arping bash and ping to function
-
 
 `$ apt-get install nmap arping bash iputils-ping`
 
