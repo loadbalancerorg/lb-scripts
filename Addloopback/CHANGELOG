@@ -1,0 +1,14 @@
+Version 0.01
+
+Initial Version
+
+Version 0.02
+
+Added support for IPv4 and IPv6 addresses and a code tidyup
+
+Version 0.03
+
+Hidden options for debugging including -cleanup and -v -vv options for debugging
+-cleanup removes Loopback adapter and IP addresses from the stack configuration
+-v verbose
+-vv verbose and exit before anything actually happens 
