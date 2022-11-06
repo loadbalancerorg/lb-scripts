@@ -71,6 +71,8 @@ if ($ip) {
 }
 
 if ($cleanup) {
+   # Remove-NetIPAddress
+    Get-NetIPAddress -InterfaceAlias $loopback_name | Remove-NetIPAddress
     Remove-LoopbackAdapter ($loopback_name)
     Exit 0
 }
