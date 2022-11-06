@@ -9,6 +9,7 @@
 param(
     [Parameter(Mandatory=$false)][String] $ip4,
     [Parameter(Mandatory=$false)][String] $ip6,
+    [Parameter(Mandatory=$false)][String] $ethernet = 'Ethernet0',
     [Parameter(Mandatory=$false)][switch] $print,
     [Parameter(Mandatory=$false)][switch] $help,
     [Parameter(Mandatory=$false)][switch] $v = $false,
@@ -19,6 +20,8 @@ param(
 $Version = '0.02 beta'
 $scriptName = $MyInvocation.MyCommand
 
+$primary_interface = $ethernet
+
 function showUsage {
     showBanner
 
@@ -26,7 +29,8 @@ function showUsage {
     
     -ip <IP>        ip address for loopback adapter
     -print          enable printer support
-    
+    -ethernet       Name of Ethernet Interface - default is "Ethernet0"
+        
     Examples: 
         $scriptName -ip4 192.168.1.1 -print
         $scriptName -ip4 192.168.1.1
@@ -49,7 +53,7 @@ Version $Version
 $loopback_name = 'Loopback'
 
 # The name for the servers main network interface. This will be updated to allow weak host send/recieve which is most likely required for the traffic to work for the loopback interface.
-$primary_interface = 'Ethernet'
+# $primary_interface = 'Ethernet0'
 
 if ($help) {
     showUsage
