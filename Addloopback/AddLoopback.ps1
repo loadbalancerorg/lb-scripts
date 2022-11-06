@@ -12,6 +12,7 @@ param(
     [Parameter(Mandatory=$false)][String] $ethernet = 'Ethernet0',
     [Parameter(Mandatory=$false)][switch] $print,
     [Parameter(Mandatory=$false)][switch] $help,
+    [Parameter(Mandatory=$false)][switch] $cleanup,
     [Parameter(Mandatory=$false)][switch] $v = $false,
     [Parameter(Mandatory=$false)][switch] $vv = $false # Quit before actually installing anything
 )
@@ -57,6 +58,11 @@ $loopback_name = 'Loopback'
 
 if ($help) {
     showUsage
+    Exit 0
+}
+
+if ($cleanup) {
+    Get-NetAdapter $loopback_name | Disable-NetAdapter
     Exit 0
 }
 
