@@ -72,7 +72,7 @@ if ($ip) {
 
 if ($cleanup) {
    # Remove-NetIPAddress
-    Get-NetIPAddress -InterfaceAlias $loopback_name | Remove-NetIPAddress
+    Get-NetIPAddress -InterfaceAlias $loopback_name | Remove-NetIPAddress -confirm $false
     Remove-LoopbackAdapter ($loopback_name)
     Exit 0
 }
