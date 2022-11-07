@@ -1,11 +1,26 @@
 ## AddLoopback.ps1 by Jon Morby
 ## (C) Copyright 2022
 ## All Rights Reserved
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+#     Unless required by applicable law or agreed to in writing, software
+#     distributed under the License is distributed on an "AS IS" BASIS,
+#     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#     See the License for the specific language governing permissions and
+#     limitations under the License.
+#
 ##
 ## Version Info
 ## 0.01 - Initial version (beta)
 ## 0.02 - IPv6 support enhancements
 ## 0.03 - hidden cleanup options
+
+#Requires -RunAsAdministrator
 
 param(
     [Parameter(Mandatory=$false)][String] $ip4,
@@ -19,7 +34,6 @@ param(
     [Parameter(Mandatory=$false)][switch] $vv = $false # Quit before actually installing anything
 )
 
-#Requires -RunAsAdministrator
 $Version = '0.03 beta'
 $scriptName = $MyInvocation.MyCommand
 
@@ -30,7 +44,8 @@ function showUsage {
 
     Write-Host "Usage: $scriptName parameters
     
-    -ip <IP>        ip address for loopback adapter
+    -ip4 <IP>       IPv4 address for loopback adapter
+    -ip6 <IP>       IPv6 format address for loopback adapter
     -print          enable printer support
     -ethernet       Name of Ethernet Interface - default is "Ethernet0"
         
