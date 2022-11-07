@@ -12,9 +12,9 @@ Options
 
 switch | Description
 ----- | -----
-    -ip4|An IPv4 address to add to the loopback interface
-    -ip6|An IPv6 address to add to the loopback interface
-    -print|Add the MS Client options for print and file sharing
-    -ethernet|The name of the Ethernet interface (defaults to Ethernet0)
-    -help|Display help information
+-ip4|An IPv4 address to add to the loopback interface
+-ip6|An IPv6 address to add to the loopback interface
+-print|Add the MS Client options for print and file sharing
+-ethernet|The name of the Ethernet interface (defaults to Ethernet0)
+-help|Display help information
     
