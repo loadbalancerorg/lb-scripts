@@ -27,6 +27,8 @@ fi
 if [[ ! -f ${NMAP} ]];
 then
 	echo "${NMAP} not found"
+	echo "Please install with your package manager"
+	echo "apt | rpm install nmap"
 	exit 1;
 fi
 
