@@ -6,15 +6,31 @@
 # exit with 1 if an IP is found, 0 if success
 
 # Variables
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:${PATH}
+
+PING=/usr/bin/ping
+NMAP=/usr/bin/nmap
 
 DATE=`date +%b\ %d\ %H:%M:%S` # syslog format
 APP=$(basename ${0})
 LOG=${APP}.log
-PING="ping"
 TIMEOUT=5
 DEBUG=0
 IPADDR=${1}
+
+if [[ ! -f ${PING} ]];
+then
+	echo "${PING} not found"
+	exit 1;
+fi
+
+if [[ ! -f ${NMAP} ]];
+then
+	echo "${NMAP} not found"
+	echo "Please install with your package manager"
+	echo "(apt | rpm | snapd | brew) install nmap"
+	exit 1;
+fi
 
 #### functions
 
