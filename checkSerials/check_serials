@@ -1,0 +1,15 @@
+#!/bin/bash
+# simple script to check a domain's serial numbers on all authorative name servers
+#
+if [ -z $1 ]; then
+	ZONE="fido.net"
+else
+	ZONE="$1"
+fi
+
+for d in `host -t ns $ZONE | cut -f4 -d" " `
+do
+echo -n "`host -t A $d | cut -f4 -d\ `		$d		"
+host -t soa $ZONE $d | grep SOA | cut -f7 -d" "
+done
+
