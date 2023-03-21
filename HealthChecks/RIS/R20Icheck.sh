@@ -9,7 +9,8 @@ PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
 REAL_IP=${3}
 REAL_PORT=${4}
 
-RESULT=$(echo -e "\n<PerformSelfTest/>\" | nc -zvw ${TIMEOUT} ${REAL_IP} ${REAL_PORT})
+RESULT= $(echo $'\v'\<PerformSelfTest\/\>$'\x1c'$'\r' | nc -v ${REAL_IP} ${REAL_PORT})
+
 
 if grep 'WS_CONNECTION valid="Y"' ${RESULT};
     then 
